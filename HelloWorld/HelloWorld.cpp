@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class UserAccount
+class UserAcount
 {
 public:
 	int ID;
@@ -12,12 +12,44 @@ public:
 	string PASSWORD;
 
 	//constructor for the class UserAcount
-	UserAccount(int id, string userName, string passWord)
+	UserAcount(int id, string userName, string passWord)
 		: ID(id), USERNAME(userName), PASSWORD(passWord) {}
+
+	//the method to create the user account
+public:
+	void CreateAccount(int id, string userName, string passWord) {
+		cout << "Create your ID:" << endl;
+		cin >> id;
+		cin.ignore();
+
+		cout << "Create your Username:" << endl;
+		getline(cin, userName);
+
+		cout << "Create your password:";
+		getline(cin, passWord);
+
+		UserAcount account(id, userName, passWord);
+	}
 
 };
 
 int main() {
+	int id;
+	string username, password;
+	cout << "Create your ID:" << endl;
+	cin >> id;
+	cin.ignore();
+
+	cout << "Create your Username:" << endl;
+	getline(cin, username);
+
+	cout << "Create your password:";
+	getline(cin, password);
+
+	UserAcount account(id, username, password);
+	cout << account.ID << endl;
+
+	return 0;
 
 };
 	// Run program: Ctrl + F5 or Debug > Start Without Debugging menu

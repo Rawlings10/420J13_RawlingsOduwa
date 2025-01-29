@@ -18,25 +18,59 @@ public:
 	//the method to create the user account
 public:
 	void CreateAccount() {
-		cout << "Create your ID:" << endl;
-		cin >> ID;
-		cin.ignore();
+		while (true) {
+			cout << "Create your ID:" << endl;
+			cin >> ID;	
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			if (cin.fail()) {
+				cout << "invalid ID...please use numeric characters.\n\n";
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			else {
+				break;
+			}
+		}
 
 		cout << "Create your Username:" << endl;
 		getline(cin, USERNAME);
 
 		cout << "Create your password:" << endl;
 		getline(cin, PASSWORD);
-
+		cout << "\n\n";
 	}
 
 	//the method to log in the account
-	bool Login(string loginUserName, string LoginPassWord) {
+	bool LoginCheck(string loginUserName, string LoginPassWord) {
 		if (loginUserName == USERNAME && LoginPassWord == PASSWORD) {
 			return true;
 		}
 		else {
 			return false;
+		}
+	}
+	//this method log the user into the account
+	void Login() {
+		//variables to log in the user account
+		string login_name, login_password;
+
+		while (true) {
+			cout << "--LOG IN--" << endl;
+			cin.ignore(numeric_limits<streamsize>::max() << '\n');
+			cout << "Enter your Username: " << endl;
+			getline(cin, login_name);
+
+			cout << "Enter your password: " << endl;
+			getline(cin, login_password);
+			LoginCheck(login_name, login_password);
+
+			if (LoginCheck(login_name, login_password)) {
+				cout << "Log In Successful \nAccount: " << ID << endl;
+				break;
+			}
+			else {
+				cout << "Log in Failed...invalid name and password \n\n";
+			}
 		}
 	}
 
@@ -47,9 +81,6 @@ int main() {
 	int id;
 	string username, password;
 
-	//variables to log in the user account
-	string login_name, login_password;
-
 	// the class object setting the argument to null untill the user create an account.
 	UserAcount account(0, "", "");
 
@@ -57,23 +88,7 @@ int main() {
 	account.CreateAccount();
 
 	//loop to check if the log in matches the user acount.
-	while (true) {
-		cin.ignore(numeric_limits<streamsize>::max() << '\n');
-		cout << "Enter your Username: " << endl;
-		getline(cin,login_name);
-
-		cout << "Enter your password: " << endl;
-		getline(cin,login_password);
-		account.Login(login_name, login_password);
-
-		if (account.Login(login_name, login_password)) {
-			cout << "Log In Successful \nAccount: " << account.ID << endl;
-			break;
-		}
-		else {
-			cout << "Log in Failed \n\n";
-		}
-	}
+	account.Login();
 
 	return 0;
 

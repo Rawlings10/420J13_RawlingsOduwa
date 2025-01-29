@@ -29,25 +29,30 @@ public:
 		getline(cin, passWord);
 
 		UserAcount account(id, userName, passWord);
+		cout << account.ID << endl;
 	}
 
 };
 
 int main() {
-	int id;
+	int id = NULL;
 	string username, password;
-	cout << "Create your ID:" << endl;
+
+	UserAcount account(id, username, password);
+	account.CreateAccount(id, username, password);
+
+	/*cout << "Create your ID:" << endl;
 	cin >> id;
 	cin.ignore();
 
 	cout << "Create your Username:" << endl;
 	getline(cin, username);
 
-	cout << "Create your password:";
+	cout << "Create your password:" << endl;
 	getline(cin, password);
 
 	UserAcount account(id, username, password);
-	cout << account.ID << endl;
+	cout << account.ID << endl;*/
 
 	return 0;
 

@@ -17,19 +17,17 @@ public:
 
 	//the method to create the user account
 public:
-	void CreateAccount(int id, string userName, string passWord) {
+	void CreateAccount() {
 		cout << "Create your ID:" << endl;
-		cin >> id;
+		cin >> ID;
 		cin.ignore();
 
 		cout << "Create your Username:" << endl;
-		getline(cin, userName);
+		getline(cin, USERNAME);
 
 		cout << "Create your password:" << endl;
-		getline(cin, passWord);
+		getline(cin, PASSWORD);
 
-		UserAcount account(id, userName, passWord);
-		//cout << account.ID << endl;
 	}
 
 	//the method to log in the account
@@ -46,14 +44,19 @@ public:
 
 int main() {
 	//variables to create the user account
-	int id = NULL;
+	int id;
 	string username, password;
+
 	//variables to log in the user account
 	string login_name, login_password;
 
-	UserAcount account(id, username, password);
-	account.CreateAccount(id, username, password);
+	// the class object setting the argument to null untill the user create an account.
+	UserAcount account(0, "", "");
 
+	//create the actual user account
+	account.CreateAccount();
+
+	//loop to check if the log in matches the user acount.
 	while (true) {
 		cin.ignore(numeric_limits<streamsize>::max() << '\n');
 		cout << "Enter your Username: " << endl;
@@ -64,14 +67,13 @@ int main() {
 		account.Login(login_name, login_password);
 
 		if (account.Login(login_name, login_password)) {
-			cout << "Log In Successful \n\n\n Account: " << account.ID << endl;
+			cout << "Log In Successful \nAccount: " << account.ID << endl;
 			break;
 		}
 		else {
 			cout << "Log in Failed \n\n";
 		}
 	}
-	
 
 	return 0;
 

@@ -25,34 +25,50 @@ public:
 		cout << "Create your Username:" << endl;
 		getline(cin, userName);
 
-		cout << "Create your password:";
+		cout << "Create your password:" << endl;
 		getline(cin, passWord);
 
 		UserAcount account(id, userName, passWord);
 		cout << account.ID << endl;
 	}
 
+	//the method to log in the account
+	bool Login(string loginUserName, string LoginPassWord) {
+		if (loginUserName == USERNAME && LoginPassWord == PASSWORD) {
+			cout << "Log In Successful \n\n\n Account: " << ID << endl;
+			return true;
+		}
+		else {
+			cout << "Log in Failed \n\n\n";
+			return false;
+		}
+	}
+
 };
 
 int main() {
+	//variables to create the user account
 	int id = NULL;
 	string username, password;
+	//variables to log in the user account
+	string login_name, login_password;
 
 	UserAcount account(id, username, password);
 	account.CreateAccount(id, username, password);
 
-	/*cout << "Create your ID:" << endl;
-	cin >> id;
-	cin.ignore();
+	while (true) {
+		cin.ignore(numeric_limits<streamsize>::max() << '\n');
+		cout << "Enter your Username: " << endl;
+		cin >> login_name;
+		cout << "Enter your password: " << endl;
+		cin >> login_password;
+		account.Login(login_name, login_password);
 
-	cout << "Create your Username:" << endl;
-	getline(cin, username);
-
-	cout << "Create your password:" << endl;
-	getline(cin, password);
-
-	UserAcount account(id, username, password);
-	cout << account.ID << endl;*/
+		if (account.Login(login_name, login_password)) {
+			break;
+		}
+	}
+	
 
 	return 0;
 

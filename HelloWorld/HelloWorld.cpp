@@ -29,17 +29,15 @@ public:
 		getline(cin, passWord);
 
 		UserAcount account(id, userName, passWord);
-		cout << account.ID << endl;
+		//cout << account.ID << endl;
 	}
 
 	//the method to log in the account
 	bool Login(string loginUserName, string LoginPassWord) {
 		if (loginUserName == USERNAME && LoginPassWord == PASSWORD) {
-			cout << "Log In Successful \n\n\n Account: " << ID << endl;
 			return true;
 		}
 		else {
-			cout << "Log in Failed \n\n\n";
 			return false;
 		}
 	}
@@ -59,13 +57,18 @@ int main() {
 	while (true) {
 		cin.ignore(numeric_limits<streamsize>::max() << '\n');
 		cout << "Enter your Username: " << endl;
-		cin >> login_name;
+		getline(cin,login_name);
+
 		cout << "Enter your password: " << endl;
-		cin >> login_password;
+		getline(cin,login_password);
 		account.Login(login_name, login_password);
 
 		if (account.Login(login_name, login_password)) {
+			cout << "Log In Successful \n\n\n Account: " << account.ID << endl;
 			break;
+		}
+		else {
+			cout << "Log in Failed \n\n";
 		}
 	}
 	
